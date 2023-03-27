@@ -1,0 +1,127 @@
+1. Creating a database and switching to it:
+
+> use employee_db
+
+2. Creating a collection of employees:
+
+> db.createCollection("employees")
+
+Tasks: 
+
+a. Inserting at least 5 records with at least one data type of string, number,
+boolean values.
+
+> db.employees.insertMany([
+   {
+      name: "John Smith",
+      age: 35,
+      department: "Marketing",
+      isManager: true
+   },
+   {
+      name: "Alice Johnson",
+      age: 28,
+      department: "Sales",
+      isManager: false
+   },
+   {
+      name: "Mark Brown",
+      age: 42,
+      department: "HR",
+      isManager: true
+   },
+   {
+      name: "Jessica Lee",
+      age: 31,
+      department: "IT",
+      isManager: false
+   },
+   {
+      name: "David Kim",
+      age: 29,
+      department: "Finance",
+      isManager: false
+   }
+])
+
+b. Deleting a record with a given condition (e.g. delete the employee with name "John Smith"):
+
+> db.employees.deleteOne({ name: "John Smith" })
+
+{ acknowledged: true, deletedCount: 1 }
+
+c. Displaying only some particular fields (e.g. display the name and department of particular employee):
+
+> db.employees.find({}, { name: 1, department: 1, _id: 0 })
+
+[
+  { name: 'Alice Johnson', department: 'Sales' },
+
+
+d. Update values as per a condition (e.g. update the department of the employee with name "David Kim" to "Marketing"):
+
+> db.employees.updateOne({ name: "David Kim" }, { $set: { department: "Marketing" } })
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+e. Limit the number of documents displayed (e.g. display only the first 2 employees):
+
+> db.employees.find().limit(2)
+
+[
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4c"),
+    name: 'Alice Johnson',
+    age: 28,
+    department: 'Sales',
+    isManager: false
+  },
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4d"),
+    name: 'Mark Brown',
+    age: 42,
+    department: 'HR',
+    isManager: true
+  }
+]
+
+f. Display all the documents.
+
+> db.employees.find()
+
+[
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4c"),
+    name: 'Alice Johnson',
+    age: 28,
+    department: 'Sales',
+    isManager: false
+  },
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4d"),
+    name: 'Mark Brown',
+    age: 42,
+    department: 'HR',
+    isManager: true
+  },
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4e"),
+    name: 'Jessica Lee',
+    age: 31,
+    department: 'IT',
+    isManager: false
+  },
+  {
+    _id: ObjectId("6421476265e9b40fbf19fb4f"),
+    name: 'David Kim',
+    age: 29,
+    department: 'Marketing',
+    isManager: false
+  }
+]
